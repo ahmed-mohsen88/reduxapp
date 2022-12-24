@@ -1,23 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import couterReducer from "./counterReducer";
+import store from "./store";
+import { increament, decrement, show, hide } from "./counterReducer";
 
 function App() {
+  const globalState = useSelector((state) => state);
+  const st = globalState.count;
+  const showHide = globalState.show;
+
+  const dispatch = useDispatch();
+
+  const handelClick = (action) => {
+    dispatch(action);
+  };
+
+  const handelShowHide = () => {
+    switch (showHide) {
+      case true:
+        return dispatch(hide);
+      case false:
+        return dispatch(show);
+      default:
+        break;
+    }
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      {showHide && <h1>{st}</h1>}
+      <div>
+        <button
+          onClick={() => {
+            handelClick(increament);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          +
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            handelClick(decrement);
+          }}
+        >
+          -
+        </button>
+      </div>
+      <div>
+        <button onClick={handelShowHide}>Show/hide</button>
+      </div>
     </div>
   );
 }
