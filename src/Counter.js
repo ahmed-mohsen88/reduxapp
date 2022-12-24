@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCounterValue,
-  selectGlobalState,
   selectCounterVisibility,
   increament,
   show,
@@ -10,8 +9,6 @@ import {
   decrease,
 } from "./slice";
 import {
-  AppBar,
-  Box,
   Button,
   ButtonGroup,
   Container,
@@ -19,10 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import counterRed from "./slice";
-
 function Counter() {
-  const globState = useSelector(selectGlobalState);
   const st = useSelector(selectCounterValue);
   const showHide = useSelector(selectCounterVisibility);
   const dispatch = useDispatch();
