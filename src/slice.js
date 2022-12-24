@@ -1,28 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { value: 0, show: true };
-
 const counterSlice = createSlice({
   name: "Count",
-  initialState,
+  initialState: { value: 0, show: true },
   reducers: {
     increament: (state, action) => {
-      state.value += 1;
+      state.value += action.payload;
     },
     decrease: (state, action) => {
-      state.value -= 1;
+      state.value -= action.payload;
     },
-    show: (state, action) => {
-      state.show = true;
-    },
-    hide: (state, action) => {
-      state.show = false;
-    },
+    // show_hide: (state, action) => {
+    //   state.show = action.payload;
+    // },
   },
 });
-export const { increament, decrease, show, hide } = counterSlice.actions;
+
+// we take slice.reducer && slice.action from create slice
+export const { increament, decrease } = counterSlice.actions; //destructuring to slice.action
 export const selectGlobalState = (state) => state;
-export const selectCounterValue = (state) => state.value;
-export const selectCounterVisibility = (state) => state.show;
+export const selectCounterValue = (state) => state.counter.value; //counter from store reducer
+// export const selectCounterVisibility = (state) => state.counter.show; //counter from reducer name in store file
 
 export default counterSlice.reducer;

@@ -2,12 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCounterValue,
-  selectCounterVisibility,
   increament,
-  show,
-  hide,
   decrease,
 } from "./slice";
+import { selectCounterVisibility, show_hide } from "./toggleSlice";
 import {
   Button,
   ButtonGroup,
@@ -24,9 +22,9 @@ function Counter() {
   const handelShowHide = () => {
     switch (showHide) {
       case true:
-        return dispatch(hide());
+        return dispatch(show_hide(false));
       case false:
-        return dispatch(show());
+        return dispatch(show_hide(true));
       default:
         break;
     }
@@ -45,14 +43,14 @@ function Counter() {
       <ButtonGroup>
         <Button
           onClick={() => {
-            dispatch(increament());
+            dispatch(increament(2));
           }}
         >
           +
         </Button>
         <Button
           onClick={() => {
-            dispatch(decrease());
+            dispatch(decrease(2));
           }}
         >
           -
